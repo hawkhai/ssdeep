@@ -569,15 +569,15 @@ int fuzzy_hash_file(FILE *handle, /*@out@*/ char *result)
   off_t fpos, fposend;
   int status = -1;
   struct fuzzy_state *ctx;
-  fpos = ftello(handle);
+  fpos = _ftelli64(handle);
   if (fpos < 0)
     return -1;
-  if (fseeko(handle, 0, SEEK_END) < 0)
+  if (_fseeki64(handle, 0, SEEK_END) < 0)
     return -1;
-  fposend = ftello(handle);
+  fposend = _ftelli64(handle);
   if (fposend < 0)
     return -1;
-  if (fseeko(handle, 0, SEEK_SET) < 0)
+  if (_fseeki64(handle, 0, SEEK_SET) < 0)
     return -1;
   if (NULL == (ctx = fuzzy_new()))
     return -1;
@@ -589,7 +589,7 @@ int fuzzy_hash_file(FILE *handle, /*@out@*/ char *result)
 out:
   if (status == 0)
   {
-    if (fseeko(handle, fpos, SEEK_SET) < 0)
+    if (_fseeki64(handle, fpos, SEEK_SET) < 0)
       status = -1;
   }
   fuzzy_free(ctx);

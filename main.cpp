@@ -10,6 +10,7 @@
 
 #include "ssdeep.h"
 #include "match.h"
+#include <fcntl.h>
 
 #ifdef _WIN32 
 // This can't go in main.h or we get multiple definitions of it
@@ -18,6 +19,7 @@
 int _CRT_fmode = _O_BINARY;
 #endif
 
+#define VERSION "1.0.0"
 
 static bool initialize_state(state *s)
 {
@@ -247,7 +249,7 @@ static void generate_filename(state *s, TCHAR *fn, TCHAR *cwd, TCHAR *input)
 }
 
 
-int main(int argc, char **argv)
+int main_ssdeep(int argc, char **argv)
 {
   int count, status, goal = argc;
   state *s;

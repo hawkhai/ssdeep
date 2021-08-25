@@ -4,7 +4,9 @@
 //
 // $Id: find-file-size.c 144 2012-04-24 14:59:33Z jessekornblum $ 
 //
-
+#include <sys\types.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "main.h"
 
 // Prototypes
@@ -210,16 +212,16 @@ off_t find_file_size(FILE *f)
 #if defined(_WIN32)
 off_t find_file_size(FILE *f) 
 {
-  off_t total = 0, original = ftello(f);
+  off_t total = 0, original = _ftelli64(f);
   
   // Windows does not support running fstat on block devices,
   // so there's no point in mucking about with them. 
 
-  if ((fseeko(f,0,SEEK_END)))
+  if ((_fseeki64(f,0,SEEK_END)))
     return 0;
 
-  total = ftello(f);
-  if ((fseeko(f,original,SEEK_SET)))
+  total = _ftelli64(f);
+  if ((_fseeki64(f,original,SEEK_SET)))
     return 0;
   
   return total;

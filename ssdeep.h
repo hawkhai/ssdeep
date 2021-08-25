@@ -120,10 +120,11 @@ typedef struct {
 #define realpath(A,B)   _fullpath(B,A,PATH_MAX)
 #define snprintf        _snprintf
 
-char *basename(char *a);
-extern char *optarg;
-extern int optind;
-int getopt(int argc, char *const argv[], const char *optstring);
+//char *basename(char *a);
+//extern char *optarg;
+//extern int optind;
+//int getopt(int argc, char *const argv[], const char *optstring);
+#include "getopt9/getopt.h"
 
 #define NEWLINE        "\r\n"
 #define DIR_SEPARATOR  '\\'
