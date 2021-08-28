@@ -20,7 +20,11 @@
 
 #include "match.h"
 #include <minwindef.h>
-#undef max
+
+long std_max(long a, long b) {
+    if (a > b) return a;
+    return b;
+}
 
 // The longest line we should encounter when reading files of known hashes 
 #define MAX_STR_LEN  2048
@@ -303,7 +307,7 @@ bool match_compare(state *s, Filedata * f)
     {
       if (!(_tcsncmp(f->get_filename(),
 		     (*it)->get_filename(),
-		     std::max(fn_len,_tcslen((*it)->get_filename())))) &&
+		     std_max(fn_len,_tcslen((*it)->get_filename())))) &&
 	  (f->get_signature() == (*it)->get_signature()))
       {
 	// Unless these results from different matching files (such as
