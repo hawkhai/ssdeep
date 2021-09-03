@@ -203,7 +203,7 @@ extern int fuzzy_hash_stream(FILE *handle, /*@out@*/ char *result);
  * variable must be allocated to hold at least FUZZY_MAX_RESULT bytes.
  * @return Returns zero on success, non-zero on error.
  */
-extern int fuzzy_hash_filename(const char *filename, /*@out@*/ char * result);
+extern int fuzzy_hash_filename(const wchar_t*filename, /*@out@*/ char * result);
 
 /// Computes the match score between two fuzzy hash signatures.
 /// @return Returns a value from zero to 100 indicating the

@@ -596,10 +596,10 @@ out:
   return status;
 }
 
-int fuzzy_hash_filename(const char *filename, /*@out@*/ char *result)
+int fuzzy_hash_filename(const wchar_t*filename, /*@out@*/ char *result)
 {
   int status;
-  FILE *handle = fopen(filename, "rb");
+  FILE *handle = _wfopen(filename, L"rb");
   if (NULL == handle)
     return -1;
   status = fuzzy_hash_stream(handle, result);
